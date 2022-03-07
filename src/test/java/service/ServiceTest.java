@@ -29,7 +29,8 @@ public class ServiceTest extends TestCase {
     public void testAddStudent() {
         Student student = new Student("1", "flaviu", 931, "a@gmail.com");
         service.addStudent(student);
-        assertEquals(service.findStudent("1"), student);
+        Student student2 = service.findStudent("1");
+        assertEquals(student2.getGrupa(),931);
     }
     public void testAddStudentFails() {
         Exception error = new Exception();
