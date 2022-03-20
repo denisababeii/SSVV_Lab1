@@ -15,7 +15,7 @@ public class Student implements HasID<String> {
      * @param grupa - grupa studentului
      * @param email - emailul unui student
      */
-    public Student(String idStudent, String nume, int grupa, String email) {
+    public Student(String idStudent, String nume, Integer grupa, String email) {
         this.idStudent = idStudent;
         this.nume = nume;
         this.grupa = grupa;
