@@ -1,6 +1,7 @@
 package service;
 
 import domain.Student;
+import domain.Tema;
 import junit.framework.TestCase;
 import repository.NotaXMLRepo;
 import repository.StudentXMLRepo;
@@ -117,7 +118,29 @@ public class ServiceTest extends TestCase {
         assertEquals(error.getMessage(), "Email incorect!");
     }
 
+    public void testAddAssignment_InValidID_EmptyString() {
+        Exception error = new Exception();
+        Tema tema = new Tema("","a",20,15);
+        try{
+            service.addTema(tema);
+        }
+        catch(Exception e){
+            error = e;
+        }
+        assertEquals(error.getMessage(), "Numar tema invalid!");
+    }
 
+    public void testAddAssignment_InValidDescription_EmptyString() {
+        Exception error = new Exception();
+        Tema tema = new Tema("1","",20,15);
+        try{
+            service.addTema(tema);
+        }
+        catch(Exception e){
+            error = e;
+        }
+        assertEquals(error.getMessage(), "Descriere invalida!");
+    }
 
 
 
