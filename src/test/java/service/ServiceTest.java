@@ -120,7 +120,7 @@ public class ServiceTest extends TestCase {
 
     public void testAddAssignment_InValidID_EmptyString() {
         Exception error = new Exception();
-        Tema tema = new Tema("","a",20,15);
+        Tema tema = new Tema("","a",12,10);
         try{
             service.addTema(tema);
         }
@@ -132,7 +132,7 @@ public class ServiceTest extends TestCase {
 
     public void testAddAssignment_InValidDescription_EmptyString() {
         Exception error = new Exception();
-        Tema tema = new Tema("1","",20,15);
+        Tema tema = new Tema("1","",12,10);
         try{
             service.addTema(tema);
         }
@@ -142,6 +142,52 @@ public class ServiceTest extends TestCase {
         assertEquals(error.getMessage(), "Descriere invalida!");
     }
 
+    public void testAddAssignment_InValidDeadline_BelowInterval() {
+        Exception error = new Exception();
+        Tema tema = new Tema("1","a",0,10);
+        try{
+            service.addTema(tema);
+        }
+        catch(Exception e){
+            error = e;
+        }
+        assertEquals(error.getMessage(), "Deadlineul trebuie sa fie intre 1-14.");
+    }
 
+    public void testAddAssignment_InValidDeadline_AboveInterval() {
+        Exception error = new Exception();
+        Tema tema = new Tema("1","a",15,14);
+        try{
+            service.addTema(tema);
+        }
+        catch(Exception e){
+            error = e;
+        }
+        assertEquals(error.getMessage(), "Deadlineul trebuie sa fie intre 1-14.");
+    }
+
+    public void testAddAssignment_InValidReceivingWeek_BelowInterval() {
+        Exception error = new Exception();
+        Tema tema = new Tema("1","a",10,0);
+        try{
+            service.addTema(tema);
+        }
+        catch(Exception e){
+            error = e;
+        }
+        assertEquals(error.getMessage(), "Saptamana primirii trebuie sa fie intre 1-14.");
+    }
+
+    public void testAddAssignment_InValidReceivingWeek_AboveInterval() {
+        Exception error = new Exception();
+        Tema tema = new Tema("1","a",10,15);
+        try{
+            service.addTema(tema);
+        }
+        catch(Exception e){
+            error = e;
+        }
+        assertEquals(error.getMessage(), "Saptamana primirii trebuie sa fie intre 1-14.");
+    }
 
 }
