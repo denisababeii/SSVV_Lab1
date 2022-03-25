@@ -190,4 +190,13 @@ public class ServiceTest extends TestCase {
         assertEquals(error.getMessage(), "Saptamana primirii trebuie sa fie intre 1-14.");
     }
 
+    public void testAddAssignment_Valid() {
+        Exception error = new Exception();
+        Tema tema = new Tema("1","a",10,12);
+        service.addTema(tema);
+        Tema tema1 = service.findTema("1");
+        assertEquals(tema1.getID(), "1");
+        service.deleteTema("1");
+    }
+
 }
