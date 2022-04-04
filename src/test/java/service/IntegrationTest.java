@@ -77,4 +77,49 @@ public class IntegrationTest extends TestCase {
         testAddGrade_InValidValue();
     }
 
+    public void testAddStudent_ValidStudent() {
+        Student student = new Student("1", "Ion Pop", 931, "a@gmail.com");
+        service.addStudent(student);
+        Student student2 = service.findStudent("1");
+        assertEquals(student2.getID(), "1");
+        service.deleteStudent("1");
+    }
+
+    public void testAddStudent_AddAssignment_Integration() {
+        Student student = new Student("1", "Ion Pop", 931, "a@gmail.com");
+        service.addStudent(student);
+        Student student2 = service.findStudent("1");
+        assertEquals(student2.getID(), "1");
+        Tema tema = new Tema("1", "Tema integrare", 13,2);
+        service.addTema(tema);
+        Tema tema2 = service.findTema("1");
+        assertEquals(tema2.getID(), "1");
+        service.deleteStudent("1");
+        service.deleteNota("1");
+    }
+
+    public void testAddStudent_AddAssignment_AddGrade_Integration() {
+        Exception error = new Exception();
+        Student student = new Student("1", "Ion Pop", 931, "a@gmail.com");
+        service.addStudent(student);
+        Student student2 = service.findStudent("1");
+        assertEquals(student2.getID(), "1");
+
+        Tema tema = new Tema("1", "Tema integrare", 5,3);
+        service.addTema(tema);
+        Tema tema2 = service.findTema("1");
+        assertEquals(tema2.getID(), "1");
+
+        Nota nota = new Nota("1","1", "1",10,LocalDate.of(2022,4,4));
+        try{
+            service.addNota(nota,"ok");
+        }
+        catch(Exception e){
+            error = e;
+        }
+        assertEquals(error.getMessage(), "Studentul nu mai poate preda aceasta tema!");
+
+        service.deleteTema("1");
+        service.deleteStudent("1");
+    }
 }
